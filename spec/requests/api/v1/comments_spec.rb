@@ -39,7 +39,7 @@ RSpec.describe 'Comments API' do
 
   # Test suite for GET /api/v1/projects/:project_id/tasks/:task_id/comments/:id
   describe 'GET /api/v1/projects/:project_id/tasks/:task_id/comments/:id' do
-    before { get "/api/v1/projects/:project_id/tasks/:task_id/comments/:id" }
+    before { get "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments/#{id}" }
 
     context 'when tasks comment exists' do
       it 'returns status code 200' do
@@ -59,7 +59,7 @@ RSpec.describe 'Comments API' do
       end
 
       it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find Project/)
+        expect(response.body).to match(/Couldn't find Comment/)
       end
     end
   end
