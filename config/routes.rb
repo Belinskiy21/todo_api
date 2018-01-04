@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  resources :projects do
-    resources :tasks do
-      resources :comments
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :projects do
+        resources :tasks do
+          resources :comments
+        end
+      end
     end
   end
 end
