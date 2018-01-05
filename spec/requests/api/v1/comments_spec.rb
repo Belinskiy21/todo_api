@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Comments API' do
-  # Initialize the test data
+  let(:user) { create(:user) }
   let!(:project) { create(:project) }
   let!(:tasks) { create_list(:task, 10, project_id: project.id) }
   let!(:task) { tasks.first }
@@ -9,10 +9,11 @@ RSpec.describe 'Comments API' do
   let!(:comments) { create_list(:comment, 20, task_id: task.id) }
   let(:project_id) { project.id }
   let(:id) { comments.first.id }
+  let(:headers) { valid_headers }
 
   # Test suite for GET /api/v1/projects/:project_id/tasks/:task_id/comments
   describe 'GET /api/v1/projects/:project_id/tasks/:task_id/comments' do
-    before { get "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments" }
+    before { get "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments", params: {}, headers: headers }
 
     context 'when project exists' do
       it 'returns status code 200' do
@@ -39,7 +40,7 @@ RSpec.describe 'Comments API' do
 
   # Test suite for GET /api/v1/projects/:project_id/tasks/:task_id/comments/:id
   describe 'GET /api/v1/projects/:project_id/tasks/:task_id/comments/:id' do
-    before { get "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments/#{id}" }
+    before { get "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments/#{id}", params: {}, headers: headers }
 
     context 'when tasks comment exists' do
       it 'returns status code 200' do
@@ -64,12 +65,12 @@ RSpec.describe 'Comments API' do
     end
   end
 
-  # Test suite for PUT /api/v1/projects/:project_id/tasks/:task_id/comments
+  # Test suite for POST /api/v1/projects/:project_id/tasks/:task_id/comments
   describe 'POST /api/v1/projects/:project_id/tasks/:task_id/comments' do
-    let(:valid_attributes) { { text: 'Visit Narnia and kill them all!' } }
+    let(:valid_attributes) { { text: 'Visit Narnia and kill them all!' }.to_json }
 
     context 'when request attributes are valid' do
-      before { post "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments", params: valid_attributes }
+      before { post "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments", params: valid_attributes, headers: headers }
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
@@ -77,7 +78,7 @@ RSpec.describe 'Comments API' do
     end
 
     context 'when an invalid request' do
-      before { post "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments", params: {} }
+      before { post "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments", params: {}, headers: headers }
 
       it 'returns status code 422' do
         expect(response).to have_http_status(422)
@@ -87,7 +88,7 @@ RSpec.describe 'Comments API' do
 
   # Test suite for DELETE /api/v1/projects/:project_id/tasks/:task_id/comments/:id
   describe 'DELETE /api/v1/projects/:project_id/tasks/:task_id/comments/:id' do
-    before { delete "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments/#{id}" }
+    before { delete "/api/v1/projects/#{project_id}/tasks/#{task_id}/comments/#{id}", params: {}, headers: headers }
 
     it 'returns status code 204' do
       expect(response).to have_http_status(204)

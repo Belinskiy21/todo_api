@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180104123252) do
+ActiveRecord::Schema.define(version: 20180105174026) do
 
   create_table "comments", force: :cascade do |t|
     t.text "text"
@@ -23,11 +23,9 @@ ActiveRecord::Schema.define(version: 20180104123252) do
 
   create_table "projects", force: :cascade do |t|
     t.string "title"
-    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "created_by"
-    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -38,6 +36,14 @@ ActiveRecord::Schema.define(version: 20180104123252) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["project_id"], name: "index_tasks_on_project_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

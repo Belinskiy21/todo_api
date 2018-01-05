@@ -14,7 +14,8 @@ gem 'sqlite3'
 gem 'puma', '~> 3.7'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-
+gem 'bcrypt', '~> 3.1.7'
+gem 'jwt'
 gem 'devise_token_auth'
 gem 'apipie-rails'
 gem 'active_model_serializers', '~> 0.10.0'

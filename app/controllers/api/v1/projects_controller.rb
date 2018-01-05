@@ -3,14 +3,14 @@ class Api::V1::ProjectsController < ApplicationController
   respond_to :json
   # GET /projects
   def index
-    @projects = Project.all
+    @projects = current_user.projects
     json_response(@projects)
   end
 
   # POST /projects
   def create
-    @project = Project.create!(project_params)
-    json_response(@project)
+    @project = current_user.projects.create!(project_params)
+    json_response(@project, :created)
   end
 
   # GET /projects/:id
@@ -34,7 +34,7 @@ class Api::V1::ProjectsController < ApplicationController
 
   def project_params
     # whitelist params
-    params.permit(:title, :created_by)
+    params.permit(:title)
   end
 
   def set_project
