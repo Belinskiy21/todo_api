@@ -1,10 +1,27 @@
 class Api::V1::CommentsController < Api::V1::ApiController
+  before_action :authenticate_user!
+  load_and_authorize_resource :task
+  load_and_authorize_resource :comment, through: :task
   before_action :set_project
   before_action :set_project_task
   before_action :set_project_task_comment, only: [:show, :create, :destroy]
 
+  resource_description do
+    short '​List of comments on task'
+    error code: 401, desc: 'Unauthorized'
+    error code: 404, desc: 'Not Found'
+    error code: 422, desc: 'Unprocessable entity'
+    error code: 500, desc: 'Internal Server Error'
+    formats ['json']
+  end
 
-  # GET /projects/:project_id/tasks/:task_id/comments
+  def_param_group :comment do
+    param :project_id, :number, required: true
+    param :task_id, :number, required: true
+  end
+
+  api :GET, '/projects/:project_id/tasks:task_id/comments', 'List of comments for task'
+  param_group :comment
   def index
     json_response(@task.comments)
   end
@@ -14,13 +31,20 @@ class Api::V1::CommentsController < Api::V1::ApiController
     json_response(@comment)
   end
 
-  # POST /projects/:project_id/tasks/:task_id/comments
+  api :POST, '/projects/:project_id/tasks:task_id/comments', 'Create new comment'
+  param :comment, Hash, action_aware: true, required: true do
+    param :body, String, required: true
+    param :attachment, String, required: false, desc: 'base64 attached image'
+  end
+  param_group :comment
   def create
     @task.comments.create!(comment_params)
     json_response(@project, :created)
   end
 
-  # DELETE /projects/:project_id/tasks/:task_id/comments/:id
+  api :POST, '/projects/:project_id/tasks:task_id/comments/:id', 'Destroy comment by id'
+  param :id, :number, required: true
+  param_group :comment
   def destroy
     @comment.destroy
     head :no_content

@@ -1,13 +1,22 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :update, :destroy]
+  load_and_authorize_resource through: :current_user
   respond_to :json
-  # GET /projects
+
+  def_param_group :project do
+    param :project, Hash, action_aware: true, required: true do
+      param :name, String, required: true
+    end
+  end
+
+  api :GET, '/projects', "Return user's projects"
   def index
     @projects = current_user.projects
     json_response(@projects)
   end
 
-  # POST /projects
+  api :POST, '/projects', 'Create new project'
+  param_group :project
   def create
     @project = current_user.projects.create!(project_params)
     json_response(@project, :created)
@@ -18,13 +27,16 @@ class Api::V1::ProjectsController < ApplicationController
     json_response(@project)
   end
 
-  # PUT /projects/:id
+  api :PUT, '/projects/:id', 'Update project name'
+  param_group :project
+  param :id, :number, required: true
   def update
     @project.update(project_params)
     head :no_content
   end
 
-  # DELETE /projects/:id
+  api :DELETE, '/projects/:id', 'Desroy certain list of tasks with project'
+  param :id, :number, required: true
   def destroy
     @project.destroy
     head :no_content
