@@ -1,11 +1,9 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :update, :destroy]
-  load_and_authorize_resource through: :current_user
-  respond_to :json
 
   def_param_group :project do
     param :project, Hash, action_aware: true, required: true do
-      param :name, String, required: true
+      # param :title, String, required: true
     end
   end
 
@@ -27,7 +25,7 @@ class Api::V1::ProjectsController < ApplicationController
     json_response(@project)
   end
 
-  api :PUT, '/projects/:id', 'Update project name'
+  api :PUT, '/projects/:id', 'Update project title'
   param_group :project
   param :id, :number, required: true
   def update

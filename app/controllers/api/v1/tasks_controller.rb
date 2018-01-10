@@ -1,7 +1,4 @@
 class Api::V1::TasksController < Api::V1::ApiController
-  before_action :authenticate_user!
-  load_and_authorize_resource :project
-  load_and_authorize_resource :task, through: :project
   before_action :set_project
   before_action :set_project_task, only: [:show, :update, :destroy]
 
@@ -16,9 +13,8 @@ class Api::V1::TasksController < Api::V1::ApiController
 
   def_param_group :task do
     param :task, Hash, action_aware: true, required: true do
-      param :project_id, :number, required: true
-      param :name, String, required: true
-      param :move, %w[up down], required: false
+      # param :project_id, :number, required: true
+      # param :title, String, required: true
     end
   end
 

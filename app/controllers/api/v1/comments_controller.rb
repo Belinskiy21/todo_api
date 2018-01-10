@@ -1,7 +1,4 @@
 class Api::V1::CommentsController < Api::V1::ApiController
-  before_action :authenticate_user!
-  load_and_authorize_resource :task
-  load_and_authorize_resource :comment, through: :task
   before_action :set_project
   before_action :set_project_task
   before_action :set_project_task_comment, only: [:show, :create, :destroy]
@@ -33,8 +30,8 @@ class Api::V1::CommentsController < Api::V1::ApiController
 
   api :POST, '/projects/:project_id/tasks:task_id/comments', 'Create new comment'
   param :comment, Hash, action_aware: true, required: true do
-    param :body, String, required: true
-    param :attachment, String, required: false, desc: 'base64 attached image'
+    # param :text, String, required: true
+    param :file, String, required: false, desc: 'base64 attached image'
   end
   param_group :comment
   def create
