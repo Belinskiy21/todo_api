@@ -9,8 +9,12 @@ class Api::V1::ProjectsController < ApplicationController
 
   api :GET, '/projects', "Return user's projects"
   def index
-    @projects = current_user.projects
-    json_response(@projects)
+    if current_user
+      @projects = current_user.projects
+      json_response(@projects)
+    else
+      render json: {}, status: :unauthorized
+    end
   end
 
   api :POST, '/projects', 'Create new project'
