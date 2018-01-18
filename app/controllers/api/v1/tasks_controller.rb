@@ -3,7 +3,7 @@ class Api::V1::TasksController < Api::V1::ApiController
   before_action :set_project_task, only: [:show, :update, :destroy]
 
   resource_description do
-    short '​List of tasks inside a project'
+    # short '​List of tasks inside a project'
     error code: 401, desc: 'Unauthorized'
     error code: 404, desc: 'Not Found'
     error code: 422, desc: 'Unprocessable entity'

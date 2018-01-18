@@ -4,7 +4,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
   before_action :set_project_task_comment, only: [:show, :create, :destroy]
 
   resource_description do
-    short '​List of comments on task'
+    # short '​List of comments on task'
     error code: 401, desc: 'Unauthorized'
     error code: 404, desc: 'Not Found'
     error code: 422, desc: 'Unprocessable entity'
