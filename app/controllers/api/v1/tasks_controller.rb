@@ -53,7 +53,7 @@ class Api::V1::TasksController < Api::V1::ApiController
   private
 
   def task_params
-    params.permit(:title, :done)
+    params.permit(:title, :done, :deadline)
   end
 
   def set_project

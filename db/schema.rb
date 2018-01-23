@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180110180640) do
+ActiveRecord::Schema.define(version: 20180122201832) do
 
   create_table "comments", force: :cascade do |t|
     t.text "text"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20180110180640) do
 
   create_table "tasks", force: :cascade do |t|
     t.string "title"
-    t.date "deadline"
+    t.string "deadline"
     t.boolean "done", default: false
     t.integer "project_id"
     t.datetime "created_at", null: false
