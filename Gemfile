@@ -20,6 +20,7 @@ gem 'devise_token_auth'
 gem 'apipie-rails'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'acts_as_list'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

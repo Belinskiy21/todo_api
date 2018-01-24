@@ -39,6 +39,7 @@ class Api::V1::TasksController < Api::V1::ApiController
   param_group :task
   param :id, :number, required: true
   def update
+    Task.change(@task, params[:move]) if params[:move]
     @task.update(task_params)
     head :no_content
   end
@@ -53,7 +54,7 @@ class Api::V1::TasksController < Api::V1::ApiController
   private
 
   def task_params
-    params.permit(:title, :done, :deadline)
+    params.permit(:title, :done, :deadline, :position)
   end
 
   def set_project
