@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: freebel
+  api_key: '428529525874568'
+  api_secret: 1HSTk-NVlLCv3IpBw7i45NUtHz0
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: freebel
+  api_key: '428529525874568'
+  api_secret: 1HSTk-NVlLCv3IpBw7i45NUtHz0
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: freebel
+  api_key: '428529525874568'
+  api_secret: 1HSTk-NVlLCv3IpBw7i45NUtHz0
+  enhance_image_tag: true
+  static_image_support: false

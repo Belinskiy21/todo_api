@@ -4,7 +4,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
   before_action :set_project_task_comment, only: [:show, :create, :destroy]
 
   resource_description do
-    # short '​List of comments on task'
+    short 'List of comments on task'
     error code: 401, desc: 'Unauthorized'
     error code: 404, desc: 'Not Found'
     error code: 422, desc: 'Unprocessable entity'
@@ -30,7 +30,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
 
   api :POST, '/projects/:project_id/tasks:task_id/comments', 'Create new comment'
   param :comment, Hash, action_aware: true, required: true do
-    # param :text, String, required: true
+    param :text, String, required: true
     param :file, String, required: false, desc: 'base64 attached image'
   end
   param_group :comment
@@ -50,7 +50,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
   private
 
   def comment_params
-    params.permit(:text)
+    params.permit(:text, :file)
   end
 
   def set_project
