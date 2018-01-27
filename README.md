@@ -1,11 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+link to app documentation: http://rocky-cove-79647.herokuapp.com/apipie
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version 2.4.1
 
 * System dependencies
 
