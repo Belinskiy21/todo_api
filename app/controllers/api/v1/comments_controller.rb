@@ -29,10 +29,10 @@ class Api::V1::CommentsController < Api::V1::ApiController
   end
 
   api :POST, '/projects/:project_id/tasks:task_id/comments', 'Create new comment'
-  param :comment, Hash, action_aware: true, required: true do
-    param :text, String, required: true
-    param :file, String, required: false, desc: 'base64 attached image'
-  end
+  # param :comment, Object, action_aware: true, required: true do
+  #   param :text, String, required: true
+  #   param :file, String, required: false, desc: 'base64 file image'
+  # end
   param_group :comment
   def create
     @task.comments.create!(comment_params)
