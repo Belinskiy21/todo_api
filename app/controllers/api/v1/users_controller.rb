@@ -1,7 +1,7 @@
 class UsersController < Api::V1::ApiController
   skip_before_action :authorize_request, only: :create
 
-  api :POST, '/api/v1/signup', 'Create new user'
+  api :POST, '/signup', 'Create new user'
   param :email, String, required: true
   param :password, String, required: true
   param :password_confirmation, String, required: true
