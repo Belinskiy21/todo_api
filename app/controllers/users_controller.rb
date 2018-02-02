@@ -1,4 +1,4 @@
-class UsersController < Api::V1::ApiController
+class UsersController < ApplicationController
   skip_before_action :authorize_request, only: :create
 
   api :POST, '/signup', 'Create new user'
