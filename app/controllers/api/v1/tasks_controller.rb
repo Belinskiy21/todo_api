@@ -3,7 +3,7 @@ class Api::V1::TasksController < Api::V1::ApiController
   before_action :set_project_task, only: [:show, :update, :destroy]
 
   resource_description do
-    # short '​List of tasks inside a project'
+    short 'List of tasks inside a project'
     error code: 401, desc: 'Unauthorized'
     error code: 404, desc: 'Not Found'
     error code: 422, desc: 'Unprocessable entity'
@@ -13,8 +13,8 @@ class Api::V1::TasksController < Api::V1::ApiController
 
   def_param_group :task do
     param :task, Hash, action_aware: true, required: true do
-      # param :project_id, :number, required: true
-      # param :title, String, required: true
+      param :project_id, :number, required: true
+      param :title, String, required: true
     end
   end
 
@@ -23,7 +23,7 @@ class Api::V1::TasksController < Api::V1::ApiController
     json_response(@project.tasks)
   end
 
-  # GET /projects/:project_id/tasks/:id
+  api :GET, '/projects/:project_id/tasks/:id'
   def show
     json_response(@task)
   end

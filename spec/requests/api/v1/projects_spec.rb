@@ -15,6 +15,7 @@ RSpec.describe 'Projects API', type: :request do
       # Note `json` is a custom helper to parse JSON responses
       expect(json).not_to be_empty
       expect(json.size).to eq(10)
+      expect(response).to match_response_schema('projects')
     end
 
     it 'returns status code 200' do

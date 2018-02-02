@@ -30,6 +30,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'pry'
   gem 'spring-commands-rspec'
+  gem "json_matchers"
 end
 
 group :development do

@@ -49,6 +49,7 @@ RSpec.describe 'Comments API' do
 
       it 'returns the comment' do
         expect(json['id']).to eq(id)
+        expect(response).to match_response_schema('comment')
       end
     end
 
@@ -74,6 +75,7 @@ RSpec.describe 'Comments API' do
 
       it 'returns status code 201' do
         expect(response).to have_http_status(201)
+        expect(response).to match_response_schema('comment')
       end
     end
 

@@ -19,6 +19,7 @@ RSpec.describe 'Tasks API' do
 
       it 'returns all project tasks' do
         expect(json.size).to eq(20)
+        expect(response).to match_response_schema('tasks')
       end
     end
 

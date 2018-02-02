@@ -3,7 +3,7 @@ class Api::V1::ProjectsController < ApplicationController
 
   def_param_group :project do
     param :project, Hash, action_aware: true, required: true do
-      # param :title, String, required: true
+      param :title, String, required: true
     end
   end
 
@@ -24,7 +24,7 @@ class Api::V1::ProjectsController < ApplicationController
     json_response(@project, :created)
   end
 
-  # GET /projects/:id
+  api :GET, '/projects/:id'
   def show
     json_response(@project)
   end

@@ -23,7 +23,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
     json_response(@task.comments)
   end
 
-  # GET /projects/:project_id/tasks/:task_id/comments/:id
+  api :GET, '/projects/:project_id/tasks/:task_id/comments/:id'
   def show
     json_response(@comment)
   end
