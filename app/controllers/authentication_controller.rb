@@ -1,6 +1,13 @@
 class AuthenticationController < ApplicationController
   skip_before_action :authorize_request, only: :authenticate
 
+  resource_description do
+    short 'Authentication errors'
+    error message: MissingToken, desc: 'Unauthorized'
+    error message: InvalidToken, desc: 'invalid credentials'
+    formats ['json']
+  end
+
   api :POST, '/auth/login', 'User login'
   param :email, String, required: true
   param :password, String, required: true
