@@ -5,7 +5,7 @@
     "id": { "type": "number" },
     "task_id": { "type": "number" },
     "text": { "type": "string" },
-    "file": { "type": ["string", "null"] },
+    "file": { "type": {} },
     "created_at": { "type": "string" },
     "updated_at": { "type": "string" }
   }
