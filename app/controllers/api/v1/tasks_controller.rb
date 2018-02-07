@@ -41,8 +41,8 @@ class Api::V1::TasksController < Api::V1::ApiController
   param :id, :number, required: true
   def update
     Task.change(@task, params[:move]) if params[:move]
-    @task.update(task_params)
-    head :no_content
+    @task = @task.update(task_params)
+    json_response(@task, :updated)
   end
 
   api :DELETE, '/projects/:project_id/tasks/:id', 'Desroy task by :id'
