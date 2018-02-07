@@ -1,6 +1,13 @@
 class UsersController < ApplicationController
   skip_before_action :authorize_request, only: :create
 
+  resource_description do
+    short 'Authorization errors'
+    error code: 401, desc: 'Unauthorized'
+    error code: 422, desc: 'invalid credentials'
+    formats ['json']
+  end
+
   api :POST, '/signup', 'Create new user'
   param :email, String, required: true
   param :password, String, required: true
