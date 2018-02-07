@@ -3,8 +3,8 @@ class AuthenticationController < ApplicationController
 
   resource_description do
     short 'Authentication errors'
-    error message: MissingToken, desc: 'Unauthorized'
-    error message: InvalidToken, desc: 'invalid credentials'
+    error code: 401, desc: 'Unauthorized'
+    error code: 422, desc: 'invalid credentials'
     formats ['json']
   end
 
