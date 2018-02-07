@@ -1,6 +1,15 @@
 class Api::V1::ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :update, :destroy]
 
+  resource_description do
+    short 'List of projects'
+    error code: 401, desc: 'Unauthorized'
+    error code: 404, desc: 'Not Found'
+    error code: 422, desc: 'Unprocessable entity'
+    error code: 500, desc: 'Internal Server Error'
+    formats ['json']
+  end
+
   def_param_group :project do
     param :project, Hash, action_aware: true, required: true do
       param :title, String, required: true
@@ -24,7 +33,8 @@ class Api::V1::ProjectsController < ApplicationController
     json_response(@project, :created)
   end
 
-  api :GET, '/projects/:id'
+  api :GET, '/projects/:id', 'Return project by id'
+  param_group :project
   def show
     json_response(@project)
   end

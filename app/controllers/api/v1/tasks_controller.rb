@@ -23,7 +23,8 @@ class Api::V1::TasksController < Api::V1::ApiController
     json_response(@project.tasks)
   end
 
-  api :GET, '/projects/:project_id/tasks/:id'
+  api :GET, '/projects/:project_id/tasks/:id', "Return task by id"
+  param_group :task
   def show
     json_response(@task)
   end
