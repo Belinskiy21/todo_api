@@ -32,8 +32,8 @@ class Api::V1::TasksController < Api::V1::ApiController
   api :POST, '/projects/:project_id/tasks', 'Create new task'
   param_group :task
   def create
-    @project.tasks.create!(task_params)
-    json_response(@project, :created)
+    @task = @project.tasks.create!(task_params)
+    json_response(@task, :created)
   end
 
   api :PUT, '/projects/:project_id/tasks/:id', 'Update task'
