@@ -36,7 +36,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
   end
   param_group :comment
   def create
-    @task.comments.create!(comment_params)
+    @comment = @task.comments.create!(comment_params)
     json_response(@comment, :created)
   end
 
