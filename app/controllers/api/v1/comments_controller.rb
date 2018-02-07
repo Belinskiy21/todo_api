@@ -37,7 +37,7 @@ class Api::V1::CommentsController < Api::V1::ApiController
   param_group :comment
   def create
     @task.comments.create!(comment_params)
-    json_response(@project, :created)
+    json_response(@comment, :created)
   end
 
   api :POST, '/projects/:project_id/tasks:task_id/comments/:id', 'Destroy comment by id'
